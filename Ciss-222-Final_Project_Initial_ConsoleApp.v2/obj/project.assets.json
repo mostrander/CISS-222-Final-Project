@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Megan\\source\\repos\\CISS-222\\Ciss-222-Final_Project_Initial_ConsoleApp.v2\\Ciss-222-Final_Project_Initial_ConsoleApp.csproj",
+      "projectUniqueName": "C:\\Users\\Megan\\source\\repos\\CISS-222-Final-Project\\Ciss-222-Final_Project_Initial_ConsoleApp.v2\\Ciss-222-Final_Project_Initial_ConsoleApp.csproj",
       "projectName": "Ciss-222-Final_Project_Initial_ConsoleApp",
-      "projectPath": "C:\\Users\\Megan\\source\\repos\\CISS-222\\Ciss-222-Final_Project_Initial_ConsoleApp.v2\\Ciss-222-Final_Project_Initial_ConsoleApp.csproj",
+      "projectPath": "C:\\Users\\Megan\\source\\repos\\CISS-222-Final-Project\\Ciss-222-Final_Project_Initial_ConsoleApp.v2\\Ciss-222-Final_Project_Initial_ConsoleApp.csproj",
       "packagesPath": "C:\\Users\\Megan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Megan\\source\\repos\\CISS-222\\Ciss-222-Final_Project_Initial_ConsoleApp.v2\\obj\\",
+      "outputPath": "C:\\Users\\Megan\\source\\repos\\CISS-222-Final-Project\\Ciss-222-Final_Project_Initial_ConsoleApp.v2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Megan\\AppData\\Roaming\\NuGet\\NuGet.Config",
