@@ -1,0 +1,13 @@
+C:\Users\Megan\source\repos\Ciss-222-Final_Project_Initial_ConsoleApp\bin\Debug\netcoreapp3.1\Ciss-222-Final_Project_Initial_ConsoleApp.exe
+C:\Users\Megan\source\repos\Ciss-222-Final_Project_Initial_ConsoleApp\bin\Debug\netcoreapp3.1\Ciss-222-Final_Project_Initial_ConsoleApp.deps.json
+C:\Users\Megan\source\repos\Ciss-222-Final_Project_Initial_ConsoleApp\bin\Debug\netcoreapp3.1\Ciss-222-Final_Project_Initial_ConsoleApp.runtimeconfig.json
+C:\Users\Megan\source\repos\Ciss-222-Final_Project_Initial_ConsoleApp\bin\Debug\netcoreapp3.1\Ciss-222-Final_Project_Initial_ConsoleApp.runtimeconfig.dev.json
+C:\Users\Megan\source\repos\Ciss-222-Final_Project_Initial_ConsoleApp\bin\Debug\netcoreapp3.1\Ciss-222-Final_Project_Initial_ConsoleApp.dll
+C:\Users\Megan\source\repos\Ciss-222-Final_Project_Initial_ConsoleApp\bin\Debug\netcoreapp3.1\Ciss-222-Final_Project_Initial_ConsoleApp.pdb
+C:\Users\Megan\source\repos\Ciss-222-Final_Project_Initial_ConsoleApp\obj\Debug\netcoreapp3.1\Ciss-222-Final_Project_Initial_ConsoleApp.csprojAssemblyReference.cache
+C:\Users\Megan\source\repos\Ciss-222-Final_Project_Initial_ConsoleApp\obj\Debug\netcoreapp3.1\Ciss-222-Final_Project_Initial_ConsoleApp.AssemblyInfoInputs.cache
+C:\Users\Megan\source\repos\Ciss-222-Final_Project_Initial_ConsoleApp\obj\Debug\netcoreapp3.1\Ciss-222-Final_Project_Initial_ConsoleApp.AssemblyInfo.cs
+C:\Users\Megan\source\repos\Ciss-222-Final_Project_Initial_ConsoleApp\obj\Debug\netcoreapp3.1\Ciss-222-Final_Project_Initial_ConsoleApp.csproj.CoreCompileInputs.cache
+C:\Users\Megan\source\repos\Ciss-222-Final_Project_Initial_ConsoleApp\obj\Debug\netcoreapp3.1\Ciss-222-Final_Project_Initial_ConsoleApp.dll
+C:\Users\Megan\source\repos\Ciss-222-Final_Project_Initial_ConsoleApp\obj\Debug\netcoreapp3.1\Ciss-222-Final_Project_Initial_ConsoleApp.pdb
+C:\Users\Megan\source\repos\Ciss-222-Final_Project_Initial_ConsoleApp\obj\Debug\netcoreapp3.1\Ciss-222-Final_Project_Initial_ConsoleApp.genruntimeconfig.cache

@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "Ciss-222-Final_Project_Initial_ConsoleApp/1.0.0": {
+        "runtime": {
+          "Ciss-222-Final_Project_Initial_ConsoleApp.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Ciss-222-Final_Project_Initial_ConsoleApp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
