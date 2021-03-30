@@ -7,7 +7,7 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
    class Bank_Account
    {
 
-      private static int accountNumber;
+      private int accountNumber;
       private readonly string firstName;
       private readonly string lastName;
 
@@ -203,6 +203,11 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
          }
       }
 
+
+      public void TestingData()
+      {
+         Console.WriteLine($"Account number: {accountNumber}  Name: {firstName} {lastName}  Balance: {balance}");
+      }
 
    }
 }

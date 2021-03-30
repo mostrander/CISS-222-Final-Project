@@ -89,12 +89,15 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
             }
             else
             {
-               for(int i = 0; i < existingAccounts.Length; i++)
+               bool accountFound = false; 
+
+               for (int i = 0; i < existingAccounts.Length; i++)
                {
-                  existingAccounts[i].AccountLogin(username, password);
-                  if (true)
+                  accountFound = existingAccounts[i].AccountLogin(username, password);
+                  if (accountFound == true)
                   {
                      AccessAccount(existingAccounts[i]);
+                     i = 5;
                      break;
                   }
                   else

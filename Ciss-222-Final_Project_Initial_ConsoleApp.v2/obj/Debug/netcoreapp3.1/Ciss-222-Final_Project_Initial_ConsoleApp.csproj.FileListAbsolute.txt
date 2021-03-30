@@ -23,3 +23,4 @@ C:\Users\Megan\source\repos\CISS-222-Final-Project\Ciss-222-Final_Project_Initia
 C:\Users\Megan\source\repos\CISS-222-Final-Project\Ciss-222-Final_Project_Initial_ConsoleApp.v2\obj\Debug\netcoreapp3.1\Ciss-222-Final_Project_Initial_ConsoleApp.dll
 C:\Users\Megan\source\repos\CISS-222-Final-Project\Ciss-222-Final_Project_Initial_ConsoleApp.v2\obj\Debug\netcoreapp3.1\Ciss-222-Final_Project_Initial_ConsoleApp.pdb
 C:\Users\Megan\source\repos\CISS-222-Final-Project\Ciss-222-Final_Project_Initial_ConsoleApp.v2\obj\Debug\netcoreapp3.1\Ciss-222-Final_Project_Initial_ConsoleApp.genruntimeconfig.cache
+C:\Users\Megan\source\repos\CISS-222-Final-Project\Ciss-222-Final_Project_Initial_ConsoleApp.v2\obj\Debug\netcoreapp3.1\Ciss-222-Final_Project_Initial_ConsoleApp.csprojAssemblyReference.cache

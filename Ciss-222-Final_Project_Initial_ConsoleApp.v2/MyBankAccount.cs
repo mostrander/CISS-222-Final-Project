@@ -15,6 +15,7 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
          Bank_Account account2 = new Bank_Account(12485, "Sam", "Fiddle", "MagicalSong", "New York", 0.25m);
          Bank_Account account3 = new Bank_Account(1635, "Tom", "Fiddle", "Tingaling", "New York", 47415.63m);
          Bank_Account account4 = new Bank_Account(245, "Kim", "Fiddle", "puddingPop2", "New York", 16.87m);
+         Bank_Account account5 = new Bank_Account(24577, "Kimmy", "Biddle", "puddingPop2", "New York", 120.87m);
 
          Bank_Account[] establishedAccounts =  new Bank_Account [5];
 
@@ -22,6 +23,17 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
          establishedAccounts[1] = account2;
          establishedAccounts[2] = account3;
          establishedAccounts[3] = account4;
+         establishedAccounts[4] = account5;
+
+         //Need to make sure that the array actually holds the desired data
+         foreach(var item in establishedAccounts)
+         {
+            item.TestingData();
+         } //Discovered everything but the account number is correct.
+         //Found the issue. I had accountnumber in the bank_account object set to static. I thought that it would apply ONLY to the specific 
+         //object, but it actually stayed across all of them!
+
+
 
          //While statement keeps the program running while the user is using it, unless specified otherwise.
          while (endLoop == false)
@@ -38,6 +50,7 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
                {
                   case "1":
                      Console.WriteLine("Not implemented yet.");
+                     manage.LoginAttempt(establishedAccounts);
                      break;
                   case "2":
                      string firstName = null;
