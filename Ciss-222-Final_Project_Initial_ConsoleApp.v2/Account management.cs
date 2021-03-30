@@ -11,8 +11,9 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
          //used solely for allowing me to access other methods to make program work.
       }
 
-      public void AccessAccount(string response, Bank_Account account)
+      public void AccessAccount(Bank_Account account)
       {
+         string response = null;
          bool endMethod = false;
 
          while (endMethod == false)
@@ -67,6 +68,52 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
          }
       } //End of AccessAccount method
 
+
+      public void LoginAttempt(Bank_Account [] existingAccounts)
+      {
+         //corresponds with the AccountLogin method in the Bank_Account class
+         //Used for checking multiple accounts for a login match.
+
+         try
+         {
+
+            Console.WriteLine("Please provide your account number: ");
+            string username = Console.ReadLine();
+
+            Console.WriteLine("Please enter the password: ");
+            string password = Console.ReadLine();
+
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+               throw new Exception();
+            }
+            else
+            {
+               for(int i = 0; i < existingAccounts.Length; i++)
+               {
+                  existingAccounts[i].AccountLogin(username, password);
+                  if (true)
+                  {
+                     AccessAccount(existingAccounts[i]);
+                     break;
+                  }
+                  else
+                  {
+                     Console.WriteLine("Information does not match this account."); // Using for testing purposes.
+                  }
+               }
+            }
+
+         }
+         catch
+         {
+            Console.WriteLine("Was unable to log into your account. Please make sure you entered a value and try again.");
+         }
+
+
+
+
+      }
 
    }
 }

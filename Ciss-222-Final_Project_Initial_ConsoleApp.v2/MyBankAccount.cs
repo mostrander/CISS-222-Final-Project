@@ -2,7 +2,7 @@
 
 namespace Ciss_222_Final_Project_Initial_ConsoleApp
 {
-   class Program
+   class MyBankAccount
    {
       static void Main(string[] args)
       {
@@ -10,6 +10,18 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
          string response = null;
          Bank_Account account;
          Account_management manage = new Account_management();
+
+         Bank_Account account1 = new Bank_Account(1245, "Rob", "Fiddle", "puddingPop", "New York", 4536.25m);
+         Bank_Account account2 = new Bank_Account(12485, "Sam", "Fiddle", "MagicalSong", "New York", 0.25m);
+         Bank_Account account3 = new Bank_Account(1635, "Tom", "Fiddle", "Tingaling", "New York", 47415.63m);
+         Bank_Account account4 = new Bank_Account(245, "Kim", "Fiddle", "puddingPop2", "New York", 16.87m);
+
+         Bank_Account[] establishedAccounts =  new Bank_Account [5];
+
+         establishedAccounts[0] = account1;
+         establishedAccounts[1] = account2;
+         establishedAccounts[2] = account3;
+         establishedAccounts[3] = account4;
 
          //While statement keeps the program running while the user is using it, unless specified otherwise.
          while (endLoop == false)
@@ -72,7 +84,7 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
                         password = response;
                         Console.WriteLine("Creating your new bank account now...");
                         account = new Bank_Account(firstName, lastName, password); //Finish initializing the account
-                        manage.AccessAccount(response, account);
+                        manage.AccessAccount(account);
                      }
 
                      endLoop = true; //forces this loop to discontinue running, continue with rest of program.

@@ -33,13 +33,19 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
          Console.WriteLine("What city were you born in?");
          securityAnswer = Console.ReadLine();
 
+         Console.WriteLine($"Your account has been created. Your account number is: {accountNumber}");
       }
 
 
       //Will be used for recreating EXISTING bank accounts from text file
-      public Bank_Account ()
+      public Bank_Account (int account_Number, string first_Name, string last_Name, string Password, string answer, decimal accountBalance)
       {
-         Console.WriteLine("This is not implemented yet.");
+         accountNumber = account_Number;
+         firstName = first_Name;
+         lastName = last_Name;
+         password = Password;
+         securityAnswer = answer;
+         balance = accountBalance;
       }
 
       public void Deposit (decimal amount)
@@ -178,5 +184,25 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
       {
          return accountNumber.ToString();
       }
+
+      public bool AccountLogin(string username, string passwordInput)
+      {
+         //Used to verify that the user is indeed the account owner before allowing user to modify information
+         if( username != accountNumber.ToString() )
+         {
+            return false;
+         }
+         else if (username == accountNumber.ToString() && passwordInput != password)
+         {
+            Console.WriteLine("Unable to log into the account due to invalid password.");
+            return false;
+         }
+         else 
+         {
+            return true;
+         }
+      }
+
+
    }
 }
