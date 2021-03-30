@@ -8,6 +8,8 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
       {
          bool endLoop = false;
          string response = null;
+         Bank_Account account;
+         Account_management manage = new Account_management();
 
          //While statement keeps the program running while the user is using it, unless specified otherwise.
          while (endLoop == false)
@@ -69,11 +71,13 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
                      {
                         password = response;
                         Console.WriteLine("Creating your new bank account now...");
-                        Bank_Account account = new Bank_Account(firstName, lastName, password);
+                        account = new Bank_Account(firstName, lastName, password); //Finish initializing the account
+                        manage.AccessAccount(response, account);
                      }
 
                      endLoop = true; //forces this loop to discontinue running, continue with rest of program.
                      break;
+
                   case "3":
                      Console.WriteLine("Thank you. Have a good day.");
                      Environment.Exit(0); // Forces the program to close.
@@ -102,16 +106,8 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
 
          }
 
-
-
-
-
-
-
-
-
-
          Environment.Exit(0); // Forces the program to close.
       }
+
    }
 }

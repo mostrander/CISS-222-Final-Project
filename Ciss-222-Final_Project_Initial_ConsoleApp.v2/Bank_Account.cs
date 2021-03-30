@@ -12,7 +12,6 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
       private readonly string lastName;
 
       private string password;
-      private string securityQuestion; //The question asked when user forgets password.
       private string securityAnswer; //Must be correct in order to change password or reset password
       private decimal balance;
 
@@ -101,11 +100,8 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
 
       public void ChangePassword (string oldPassword, string newPassword, string newPassword2)
       {
-         if (oldPassword == password && newPassword == newPassword2)
-         {
-            password = newPassword;
-         }
-         else if (oldPassword != password)
+
+         if (oldPassword != password)
          {
             Console.WriteLine("You entered the incorrect account password.\n" +
                "Cannot successfully change password. Please try again.");
@@ -120,16 +116,30 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
                "Cannot successfully change password. Please verify you are typing the new password correctly " +
                "and try again.");
          }
+         else 
+         {
+            password = newPassword;
+            Console.WriteLine("Password has been successfully changed.");
+         }
+
       }
 
 
       //Will be used to change the answer to the account security question.
-      public void ChangeSecurityQuestionAnswer (string answer, string newAnswer, string Password)
+      public void ChangeSecurityQuestionAnswer (string Password)
       {
-         if (answer != securityAnswer)
+         Console.WriteLine("Please enter an answer for the following security question:");
+         Console.WriteLine("What city were you born in?");
+         Console.WriteLine("Your current answer: ");
+         string answer = Console.ReadLine();
+
+         Console.WriteLine("Please provide a new answer: ");
+         string newAnswer = Console.ReadLine();
+
+         if (string.IsNullOrEmpty(newAnswer))
          {
-            Console.WriteLine("Error: Your current answer to the security question is incorrect.\n" +
-               "Please try again.");
+            Console.WriteLine("Error: You did not enter a new answer to the security question!\n" +
+               "Unable to update your answer to the security question. Please try again.");
          }
 
          else if (Password != password)
@@ -138,10 +148,10 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
                "Please try again.");
          }
 
-         else if (string.IsNullOrEmpty(newAnswer))
+         else if (answer != securityAnswer )
          {
-            Console.WriteLine("Error: You did not enter a new answer to the security question!\n" +
-               "Unable to update your answer to the security question. Please try again.");
+            Console.WriteLine("Error: Your current answer to the security question is incorrect.\n" +
+               "Please try again.");
          }
 
          else
@@ -153,20 +163,20 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
       }
 
 
-      public void ChangeSecurityQuestion (string Password)
-      {
-         if (Password != password)
-         {
-            Console.WriteLine("The account password you entered is incorrect. " +
-               "Please try again.");
-         }
 
-         else
-         {
-            Console.WriteLine("This is not implemented yet.");
-         }
+      public string GetName()
+      {
+         return firstName + lastName;
       }
 
+      public string GetBalance()
+      {
+         return balance.ToString("C");
+      }
 
+      public string GetAccountNumber()
+      {
+         return accountNumber.ToString();
+      }
    }
 }
