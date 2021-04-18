@@ -74,6 +74,8 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
          //corresponds with the AccountLogin method in the Bank_Account class
          //Used for checking multiple accounts for a login match.
 
+         bool accountFound = false; 
+
          try
          {
 
@@ -89,11 +91,11 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
             }
             else
             {
-               bool accountFound = false; 
-
                for (int i = 0; i < existingAccounts.Length; i++)
                {
+                  //returns True is information matches login information for existing account
                   accountFound = existingAccounts[i].AccountLogin(username, password);
+
                   if (accountFound == true)
                   {
                      AccessAccount(existingAccounts[i]);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Ciss_222_Final_Project_Initial_ConsoleApp
 {
@@ -11,11 +12,11 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
          Bank_Account account;
          Account_management manage = new Account_management();
 
-         Bank_Account account1 = new Bank_Account(1245, "Rob", "Fiddle", "puddingPop", "New York", 4536.25m);
-         Bank_Account account2 = new Bank_Account(12485, "Sam", "Fiddle", "MagicalSong", "New York", 0.25m);
-         Bank_Account account3 = new Bank_Account(1635, "Tom", "Fiddle", "Tingaling", "New York", 47415.63m);
-         Bank_Account account4 = new Bank_Account(245, "Kim", "Fiddle", "puddingPop2", "New York", 16.87m);
-         Bank_Account account5 = new Bank_Account(24577, "Kimmy", "Biddle", "puddingPop2", "New York", 120.87m);
+         Bank_Account account1 = new Bank_Account("1245", "Rob", "Fiddle", "puddingPop", "New York", 4536.25m);
+         Bank_Account account2 = new Bank_Account("12485", "Sam", "Fiddle", "MagicalSong", "New York", 0.25m);
+         Bank_Account account3 = new Bank_Account("1635", "Tom", "Fiddle", "Tingaling", "New York", 47415.63m);
+         Bank_Account account4 = new Bank_Account("245", "Kim", "Fiddle", "puddingPop2", "New York", 16.87m);
+         Bank_Account account5 = new Bank_Account("24577", "Kimmy", "Biddle", "puddingPop2", "New York", 120.87m);
 
          Bank_Account[] establishedAccounts =  new Bank_Account [5];
 
@@ -96,7 +97,7 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
                      {
                         password = response;
                         Console.WriteLine("Creating your new bank account now...");
-                        account = new Bank_Account(firstName, lastName, password); //Finish initializing the account
+                        account = new Bank_Account(firstName, lastName, password, establishedAccounts); //Finish initializing the account
                         manage.AccessAccount(account);
                      }
 
@@ -105,6 +106,17 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
 
                   case "3":
                      Console.WriteLine("Thank you. Have a good day.");
+
+                     //Saves all account information to a file so it can be used next time program is launched
+                     Console.WriteLine("Testing the SaveAccountInformation method...");
+
+                     for (int i = 0; i < establishedAccounts.Length; i++)
+                     {
+                        Console.WriteLine(establishedAccounts[i].SaveAccountInfo());
+                     }
+
+
+
                      Environment.Exit(0); // Forces the program to close.
                      break;
                   default:
