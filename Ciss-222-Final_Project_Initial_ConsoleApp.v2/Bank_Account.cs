@@ -17,7 +17,7 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
 
 
       //Will be used for the creation of NEW bank accounts. Default starting balance is $0;
-      public Bank_Account (string first_Name, string last_Name, string Password, Bank_Account[] existingAccounts)
+      public Bank_Account (string first_Name, string last_Name, string Password, List<Bank_Account> existingAccounts)
       {
          firstName = first_Name;
          lastName = last_Name;
@@ -26,19 +26,19 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
 
          //Randomly generates an account number automatically and assigns it to account.
          //NOTE: Need to add verification that number does not already exist, otherwise reroll!
-         Random accountNum = new Random();
-         accountNum.Next();
+         Random randomNum = new Random();
+         int accountNumberAuto = randomNum.Next();
 
-         for (int i = 0; i < existingAccounts.Length; i++)
+         for (int i = 0; i < existingAccounts.Count; i++)
          {
-            if (accountNum.ToString() == existingAccounts[i].accountNumber)
+            if (accountNumberAuto.ToString() == existingAccounts[i].accountNumber)
             {
-               accountNum = new Random();
+               accountNumberAuto = randomNum.Next();
                i = 0;
             }
          }
 
-         accountNumber = accountNum.ToString();
+         accountNumber = accountNumberAuto.ToString();
 
          Console.WriteLine("Please enter an answer for the following security question:");
          Console.WriteLine("What city were you born in?");
@@ -49,14 +49,14 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
 
 
       //Will be used for recreating EXISTING bank accounts from text file
-      public Bank_Account (string account_Number, string first_Name, string last_Name, string Password, string answer, decimal accountBalance)
+      public Bank_Account (string account_Number, string first_Name, string last_Name, string Password, string answer, string accountBalance)
       {
          accountNumber = account_Number;
          firstName = first_Name;
          lastName = last_Name;
          password = Password;
          securityAnswer = answer;
-         balance = accountBalance;
+         balance = decimal.Parse(accountBalance);
       }
 
       public void Deposit (decimal amount)
@@ -214,16 +214,17 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
          }
       }
 
-
+      //Temp method for testing purposes to ensure things are being passed into list correctly at beginning of program
       public void TestingData()
       {
-         Console.WriteLine($"Account number: {accountNumber}  Name: {firstName} {lastName}  Balance: {balance}");
+         Console.WriteLine($"Account number: {accountNumber}  Name: {firstName} {lastName}  Balance: ${balance}");
       }
 
 
+      //Method for saving information to a file, need to find a better way to implement this due to security issues
       public string SaveAccountInfo()
       {
-         return $"\"{accountNumber}\", \"{firstName}\", \"{lastName}\", \"{password}\", \"{securityAnswer}\", {balance}m ";
+         return $"{accountNumber}, {firstName}, {lastName}, {password}, {securityAnswer}, {balance} ";
       }
 
    }

@@ -69,7 +69,7 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
       } //End of AccessAccount method
 
 
-      public void LoginAttempt(Bank_Account [] existingAccounts)
+      public void LoginAttempt(List<Bank_Account> existingAccounts)
       {
          //corresponds with the AccountLogin method in the Bank_Account class
          //Used for checking multiple accounts for a login match.
@@ -91,7 +91,7 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
             }
             else
             {
-               for (int i = 0; i < existingAccounts.Length; i++)
+               for (int i = 0; i < existingAccounts.Count; i++)
                {
                   //returns True is information matches login information for existing account
                   accountFound = existingAccounts[i].AccountLogin(username, password);
