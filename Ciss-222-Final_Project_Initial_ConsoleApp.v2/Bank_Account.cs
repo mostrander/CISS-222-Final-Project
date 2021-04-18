@@ -1,57 +1,76 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Ciss_222_Final_Project_Initial_ConsoleApp
 {
    class Bank_Account
    {
 
-      private string accountNumber;
+      private int accountNumber;
       private readonly string firstName;
       private readonly string lastName;
-
       private string password;
       private string securityAnswer; //Must be correct in order to change password or reset password
       private decimal balance;
 
 
       //Will be used for the creation of NEW bank accounts. Default starting balance is $0;
-      public Bank_Account (string first_Name, string last_Name, string Password, List<Bank_Account> existingAccounts)
+      public Bank_Account (string first_Name, string last_Name, string passwordGiven, List<Bank_Account> existingAccounts)
       {
          firstName = first_Name;
          lastName = last_Name;
-         password = Password;
+         password = passwordGiven;
          balance = 0;
 
          //Randomly generates an account number automatically and assigns it to account.
          //NOTE: Need to add verification that number does not already exist, otherwise reroll!
          Random randomNum = new Random();
-         int accountNumberAuto = randomNum.Next();
+         int accountNumberAuto = randomNum.Next(3);
 
-         for (int i = 0; i < existingAccounts.Count; i++)
+         bool accountNumFound = true;
+
+         while (accountNumFound == true)
          {
-            if (accountNumberAuto.ToString() == existingAccounts[i].accountNumber)
+            IEnumerable<Bank_Account> findAccount = from accounts in existingAccounts
+                              where accounts.GetAccountNumber() == accountNumberAuto
+                              select accounts;
+
+            if (findAccount.Count() == 0)
             {
-               accountNumberAuto = randomNum.Next();
-               i = 0;
+               accountNumFound = false;
+            }
+            else
+            {
+               accountNumberAuto = randomNum.Next(3);
             }
          }
 
-         accountNumber = accountNumberAuto.ToString();
+
+         //for (int i = 0; i < existingAccounts.Count; i++)
+         //{
+         //   if (accountNumberAuto.ToString() == existingAccounts[i].accountNumber.ToString())
+         //   {
+         //      accountNumberAuto = randomNum.Next(3);
+         //      i = 0;
+         //   }
+         //}
+
+         accountNumber = accountNumberAuto;
 
          Console.WriteLine("Please enter an answer for the following security question:");
          Console.WriteLine("What city were you born in?");
          securityAnswer = Console.ReadLine();
 
-         Console.WriteLine($"Your account has been created. Your account number is: {accountNumber}");
+         Console.WriteLine($"Your account has been created. Your account number is: {accountNumber.ToString()}");
       }
 
 
       //Will be used for recreating EXISTING bank accounts from text file
       public Bank_Account (string account_Number, string first_Name, string last_Name, string Password, string answer, string accountBalance)
       {
-         accountNumber = account_Number;
+         accountNumber = int.Parse(account_Number);
          firstName = first_Name;
          lastName = last_Name;
          password = Password;
@@ -180,7 +199,6 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
       }
 
 
-
       public string GetName()
       {
          return firstName + lastName;
@@ -191,9 +209,9 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
          return balance.ToString("C");
       }
 
-      public string GetAccountNumber()
+      public int GetAccountNumber()
       {
-         return accountNumber.ToString();
+         return accountNumber;
       }
 
       public bool AccountLogin(string username, string passwordInput)
@@ -214,17 +232,11 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
          }
       }
 
-      //Temp method for testing purposes to ensure things are being passed into list correctly at beginning of program
-      public void TestingData()
-      {
-         Console.WriteLine($"Account number: {accountNumber}  Name: {firstName} {lastName}  Balance: ${balance}");
-      }
-
 
       //Method for saving information to a file, need to find a better way to implement this due to security issues
       public string SaveAccountInfo()
       {
-         return $"{accountNumber}, {firstName}, {lastName}, {password}, {securityAnswer}, {balance} ";
+         return $"{accountNumber},{firstName},{lastName},{password},{securityAnswer},{balance} ";
       }
 
    }

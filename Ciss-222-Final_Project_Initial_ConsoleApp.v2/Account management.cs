@@ -120,5 +120,74 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
 
       }
 
+
+
+      public void CreateAccount(List<Bank_Account> establishedAccounts)
+      {
+         Bank_Account account;
+         string firstName = null;
+         string lastName = null;
+         string password = null;
+         string response;
+
+         try 
+         { 
+            //Request first name information and verify user input a value.
+            Console.WriteLine("What is your first name?");
+            response = Console.ReadLine();
+
+            if (string.IsNullOrEmpty(response))
+            {
+               throw new Exception();
+            }
+            else
+            {
+               firstName = response;
+            }
+
+            //Request last name information and verify user input a value.
+            Console.WriteLine("What is your last name?");
+            response = Console.ReadLine();
+
+            if (string.IsNullOrEmpty(response))
+            {
+               throw new Exception();
+            }
+            else
+            {
+               lastName = response;
+            }
+
+
+            Console.WriteLine("Please create a password:\n" +
+               "(Must be at least 8 characters in length)");
+            response = Console.ReadLine();
+
+            if (!(response.Length >= 8) || string.IsNullOrEmpty(response))
+            {
+               throw new Exception();
+            }
+            else
+            {
+               password = response;
+               Console.WriteLine("Creating your new bank account now...");
+               account = new Bank_Account(firstName, lastName, password, establishedAccounts); //Finish initializing the account
+
+               establishedAccounts.Add(account); //Add the new account to list of existing accounts
+               AccessAccount(account);
+            }
+         } 
+         catch 
+         {
+            Console.WriteLine("Invalid Information. We were unable to complete your request. Please try again.");
+         }
+
+         
+      }
+
+
+
+
+
    }
 }
