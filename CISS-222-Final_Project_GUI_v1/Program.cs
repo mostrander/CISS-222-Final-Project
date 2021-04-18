@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace CISS_222_Final_Project_GUI_v1
 {
-   static class MyAccount
+   static class Program
    {
       /// <summary>
       /// The main entry point for the application.
@@ -17,6 +17,7 @@ namespace CISS_222_Final_Project_GUI_v1
          Application.EnableVisualStyles();
          Application.SetCompatibleTextRenderingDefault(false);
          Application.Run(new Form1());
+
       }
    }
 }
