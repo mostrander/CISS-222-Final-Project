@@ -23,17 +23,20 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
          lastName = last_Name;
          password = passwordGiven;
          balance = 0;
+         string response;
 
          //Randomly generates an account number automatically and assigns it to account.
          //NOTE: Need to add verification that number does not already exist, otherwise reroll!
          Random randomNum = new Random();
-         int accountNumberAuto = randomNum.Next(3);
+         int accountNumberAuto = randomNum.Next();
 
          bool accountNumFound = true;
+         IEnumerable<Bank_Account> findAccount;
 
+         //Prevents an account from being created with an existing account number
          while (accountNumFound == true)
          {
-            IEnumerable<Bank_Account> findAccount = from accounts in existingAccounts
+            findAccount = from accounts in existingAccounts
                               where accounts.GetAccountNumber() == accountNumberAuto
                               select accounts;
 
@@ -43,25 +46,24 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
             }
             else
             {
-               accountNumberAuto = randomNum.Next(3);
+               accountNumberAuto = randomNum.Next();
             }
          }
-
-
-         //for (int i = 0; i < existingAccounts.Count; i++)
-         //{
-         //   if (accountNumberAuto.ToString() == existingAccounts[i].accountNumber.ToString())
-         //   {
-         //      accountNumberAuto = randomNum.Next(3);
-         //      i = 0;
-         //   }
-         //}
 
          accountNumber = accountNumberAuto;
 
          Console.WriteLine("Please enter an answer for the following security question:");
          Console.WriteLine("What city were you born in?");
-         securityAnswer = Console.ReadLine();
+         response = Console.ReadLine();
+
+         while (string.IsNullOrEmpty(response) || response.StartsWith(' '))
+         {
+            Console.WriteLine("Error: No value was entered. Please try again.");
+            Console.WriteLine("What city were you born in?");
+            response = Console.ReadLine();
+         }
+
+         securityAnswer = response;
 
          Console.WriteLine($"Your account has been created. Your account number is: {accountNumber.ToString()}");
       }
@@ -134,8 +136,16 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
       }
 
 
-      public void ChangePassword (string oldPassword, string newPassword, string newPassword2)
+      public void ChangePassword ()
       {
+         Console.WriteLine("Please provide your current password:");
+         string oldPassword = Console.ReadLine();
+
+         Console.WriteLine("Please provide a new password: ");
+         string newPassword = Console.ReadLine();
+
+         Console.WriteLine("Please verify the new password: ");
+         string newPasswordVerify = Console.ReadLine();
 
          if (oldPassword != password)
          {
@@ -146,10 +156,10 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
          {
             Console.WriteLine("New password must be at least 8 characters long. Please try again.");
          }
-         else if (newPassword != newPassword2)
+         else if (newPassword != newPasswordVerify)
          {
-            Console.WriteLine("The new password you entered does not match the verification field.\n" +
-               "Cannot successfully change password. Please verify you are typing the new password correctly " +
+            Console.WriteLine("You did not type the new password correctly the second time." +
+               "Cannot successfully change password. \nPlease verify you are typing the new password correctly " +
                "and try again.");
          }
          else 

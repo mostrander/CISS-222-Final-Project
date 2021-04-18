@@ -10,7 +10,6 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
       
       static void Main(string[] args)
       {
-         StreamWriter fileWriter; //Creates the StreamWriter object that allows files to be written to.
          StreamReader fileReader; //For reading in the information from a file
 
          string response = null;
@@ -38,67 +37,31 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
          //While statement keeps the program running while the user is using it, unless specified otherwise.
          while (response != "3")
          {
-            try
-            {
-               Console.WriteLine("Welcome! What are you looking to do today? Please select the number of your choice:\n" +
+            Console.WriteLine("Welcome! What are you looking to do today? Please select the number of your choice:\n" +
                   "1. Login to an account\n" +
                   "2. Create a new account\n" +
                   "3. Exit program");
-               response = Console.ReadLine();
+            response = Console.ReadLine();
 
-               switch (response)
-               {
-                  case "1":
-                     manage.LoginAttempt(establishedAccounts);
-                     break;
-
-                  case "2":
-                     manage.CreateAccount(establishedAccounts);
-                     break;
-
-                  case "3":
-                     Console.WriteLine("Thank you. Have a good day.");
-
-                     //Saves all account information to a file so it can be used next time program is launched
-                     var fileOutput = new FileStream("existingAccounts.txt", FileMode.OpenOrCreate, FileAccess.Write);
-                     fileWriter = new StreamWriter(fileOutput);
-
-                     var sorted = from accounts in establishedAccounts
-                                  orderby accounts.GetAccountNumber() ascending
-                                  select accounts;
-
-                     foreach(var item in sorted)
-                     {
-                        fileWriter.WriteLine(item.SaveAccountInfo());
-                     }
-
-                     fileWriter.Close(); //Have to close file in order for information to save to it!
-
-                     Environment.Exit(0); // Forces the program to close.
-                     break;
-
-                  default:
-                     Console.WriteLine("Error: Input provided is not an available option. Please try again " +
-                        "and select one of the options provided.");
-                     break;
-               }
-
-
-            }
-            catch
+            switch (response)
             {
-               if (string.IsNullOrEmpty(response))
-               {
-                  Console.WriteLine("Error: You did not enter a value. Please try again.");
-               }
-               else if (!(response.Length >= 8))
-               {
-                  Console.WriteLine("Error: Could not create account because password provided was not at least " +
-                     "8 characters long.\n" +
-                     "Please try again.");
-               }
-            }
+               case "1":
+                  manage.LoginAttempt(establishedAccounts);
+                  break;
 
+               case "2":
+                  manage.CreateAccount(establishedAccounts);
+                  break;
+
+               case "3":
+                  manage.UpdateBankAccounts(establishedAccounts);
+                  break;
+
+               default:
+                  Console.WriteLine("Error: Input provided is not an available option. Please try again " +
+                     "and select one of the options provided.");
+                  break;
+            }
          }
 
          Environment.Exit(0); // Forces the program to close.

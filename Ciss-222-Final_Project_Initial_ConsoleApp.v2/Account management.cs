@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Linq;
 
 namespace Ciss_222_Final_Project_Initial_ConsoleApp
 {
@@ -32,7 +34,7 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
             {
                case "1":
                   Console.WriteLine("How much money would you like to deposit?");
-                  decimal.TryParse(Console.ReadLine(), out decimal amtDeposit);
+                  decimal.TryParse(Console.ReadLine(), out decimal amtDeposit); //Automatically verifies input
                   account.Deposit(amtDeposit);
                   break;
                case "2":
@@ -41,16 +43,16 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
                   account.Withdraw(amtWithdraw);
                   break;
                case "3":
-                  Console.WriteLine("Please provide your current password:");
-                  currentPassword = Console.ReadLine();
+                  //Console.WriteLine("Please provide your current password:");
+                  //currentPassword = Console.ReadLine();
 
-                  Console.WriteLine("Please provide a new password: ");
-                  string newPassword = Console.ReadLine();
+                  //Console.WriteLine("Please provide a new password: ");
+                  //string newPassword = Console.ReadLine();
 
-                  Console.WriteLine("Please verify the new password: ");
-                  string newPasswordVerify = Console.ReadLine();
+                  //Console.WriteLine("Please verify the new password: ");
+                  //string newPasswordVerify = Console.ReadLine();
 
-                  account.ChangePassword(currentPassword, newPassword, newPasswordVerify);
+                  account.ChangePassword();
                   break;
                case "4":
                   Console.WriteLine("Please provide your current password:");
@@ -129,6 +131,8 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
          string lastName = null;
          string password = null;
          string response;
+         string response2;
+         bool validInput = false;
 
          try 
          { 
@@ -136,58 +140,83 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
             Console.WriteLine("What is your first name?");
             response = Console.ReadLine();
 
-            if (string.IsNullOrEmpty(response))
+            //Request last name information and verify user input a value.
+            Console.WriteLine("What is your last name?");
+            response2 = Console.ReadLine();
+
+            if (string.IsNullOrEmpty(response) || response.StartsWith(' ') )
             {
-               throw new Exception();
+               Console.WriteLine("Error: You did not provide your first name. Please try again.");
+               response = Console.ReadLine();
+            }
+            else if (string.IsNullOrEmpty(response2) || response2.StartsWith(' '))
+            {
+               Console.WriteLine("Error: You did not provide your last name. Please try again.");
+               response2 = Console.ReadLine();
             }
             else
             {
                firstName = response;
+               lastName = response2;
             }
-
-            //Request last name information and verify user input a value.
-            Console.WriteLine("What is your last name?");
-            response = Console.ReadLine();
-
-            if (string.IsNullOrEmpty(response))
-            {
-               throw new Exception();
-            }
-            else
-            {
-               lastName = response;
-            }
-
 
             Console.WriteLine("Please create a password:\n" +
                "(Must be at least 8 characters in length)");
             response = Console.ReadLine();
 
-            if (!(response.Length >= 8) || string.IsNullOrEmpty(response))
+            while (validInput == false)
             {
-               throw new Exception();
-            }
-            else
-            {
-               password = response;
-               Console.WriteLine("Creating your new bank account now...");
-               account = new Bank_Account(firstName, lastName, password, establishedAccounts); //Finish initializing the account
+               if (string.IsNullOrEmpty(response) || response.StartsWith(' ') || !(response.Length >= 8))
+               {
+                  Console.WriteLine("Error: You either did not enter a password or the password is not long enough. Please try again.");
+                  Console.WriteLine("Please create a password:\n" + "(Must be at least 8 characters in length)");
+                  response = Console.ReadLine();
 
-               establishedAccounts.Add(account); //Add the new account to list of existing accounts
-               AccessAccount(account);
+                  //If the password provided still does not meet requirements, cancel process.
+                  if(string.IsNullOrEmpty(response) || response.StartsWith(' ') || !(response.Length >= 8))
+                  {
+                     throw new Exception();
+                  }
+               }
+               else
+               {
+                  password = response;
+                  Console.WriteLine("Creating your new bank account now...");
+                  account = new Bank_Account(firstName, lastName, password, establishedAccounts); //Finish initializing the account
+
+                  establishedAccounts.Add(account); //Add the new account to list of existing accounts
+                  AccessAccount(account);
+               }
             }
          } 
          catch 
          {
             Console.WriteLine("Invalid Information. We were unable to complete your request. Please try again.");
          }
-
-         
       }
 
 
+      public void UpdateBankAccounts(List<Bank_Account> establishedAccounts)
+      {
+         StreamWriter fileWriter; //Creates the StreamWriter object that allows files to be written to.
+         Console.WriteLine("Thank you. Have a good day.");
 
+         //Saves all account information to a file so it can be used next time program is launched
+         var fileOutput = new FileStream("existingAccounts.txt", FileMode.OpenOrCreate, FileAccess.Write);
+         fileWriter = new StreamWriter(fileOutput);
 
+         var sorted = from accounts in establishedAccounts
+                      orderby accounts.GetAccountNumber() ascending
+                      select accounts;
 
+         foreach (var item in sorted)
+         {
+            fileWriter.WriteLine(item.SaveAccountInfo());
+         }
+
+         fileWriter.Close(); //Have to close file in order for information to save to it!
+
+         Environment.Exit(0); // Forces the program to close.
+      }
    }
 }
