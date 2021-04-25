@@ -7,7 +7,6 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
 {
    class MyBankAccount
    {
-      
       static void Main(string[] args)
       {
          StreamReader fileReader; //For reading in the information from a file
@@ -17,22 +16,31 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
 
          List<Bank_Account> establishedAccounts =  new List<Bank_Account>(); //Will hold the account information during program.
 
-         //Read account information from file and put into List.
-         var fileInput = new FileStream("existingAccounts.txt", FileMode.OpenOrCreate, FileAccess.Read);
-         fileReader = new StreamReader(fileInput);
-
-         string line;
-
-         while ((line = fileReader.ReadLine()) != null)
+         try
          {
-            string[] words = line.Split(',');
-            if (words.Length > 1) //Prevents program from reading empty lines unintentionally inserted into the persistent file of accounts
+            //Read account information from file and put into List.
+            var fileInput = new FileStream("existingAccounts.txt", FileMode.OpenOrCreate, FileAccess.Read);
+            fileReader = new StreamReader(fileInput);
+
+            string line;
+
+            while ((line = fileReader.ReadLine()) != null)
             {
-               establishedAccounts.Add( new Bank_Account(words[0], words[1], words[2], words[3], words[4], words[5]) );
+               string[] words = line.Split(',');
+               if (words.Length > 1) //Prevents program from reading empty lines unintentionally inserted into the persistent file of accounts
+               {
+                  establishedAccounts.Add( new Bank_Account(words[0], words[1], words[2], words[3], words[4]) );
+               }
             }
+
+            fileReader.Close();
+         }
+         catch
+         {
+            //File does not exist in directory
+            //File location \Ciss-222-Final_Project_Initial_ConsoleApp.v2\bin\Debug\netcoreapp3.1
          }
 
-         fileReader.Close();
 
          //While statement keeps the program running while the user is using it, unless specified otherwise.
          while (response != "3")
@@ -58,7 +66,7 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
                   break;
 
                default:
-                  Console.WriteLine("Error: Input provided is not an available option. Please try again " +
+                  Console.WriteLine("Error: Input provided is not an available option. \nPlease try again " +
                      "and select one of the options provided.");
                   break;
             }

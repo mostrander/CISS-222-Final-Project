@@ -13,55 +13,40 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
          //used solely for allowing me to access other methods to make program work.
       }
 
-      public void AccessAccount(Bank_Account account)
+      public void AccessAccount(Bank_Account account, string response)
       {
-         string response = null;
-         bool endMethod = false;
+         Console.WriteLine("\nHello " + account.GetName());
 
-         while (endMethod == false)
+         while (response != "5")
          {
-            string currentPassword = null;
-
-            Console.WriteLine("Please select from the following options: \n" +
+            Console.WriteLine("\nPlease select from the following options: \n" +
                "1. Deposit money \n" +
                "2. Withdraw money \n" +
                "3. Change password \n" +
-               "4. Change security answer \n" +
+               "4. Check balance \n" +
                "5. Log out.");
             response = Console.ReadLine();
 
             switch (response)
             {
                case "1":
-                  Console.WriteLine("How much money would you like to deposit?");
-                  decimal.TryParse(Console.ReadLine(), out decimal amtDeposit); //Automatically verifies input
+                  Console.WriteLine("\nHow much money would you like to deposit?");
+                  decimal.TryParse(Console.ReadLine(), out decimal amtDeposit); //Automatically verifies input, defaults to 0 if not valid
                   account.Deposit(amtDeposit);
                   break;
                case "2":
-                  Console.WriteLine("How much money would you like to deposit?");
+                  Console.WriteLine("\nHow much money would you like to withdraw?");
                   decimal.TryParse(Console.ReadLine(), out decimal amtWithdraw);
                   account.Withdraw(amtWithdraw);
                   break;
                case "3":
-                  //Console.WriteLine("Please provide your current password:");
-                  //currentPassword = Console.ReadLine();
-
-                  //Console.WriteLine("Please provide a new password: ");
-                  //string newPassword = Console.ReadLine();
-
-                  //Console.WriteLine("Please verify the new password: ");
-                  //string newPasswordVerify = Console.ReadLine();
-
                   account.ChangePassword();
                   break;
                case "4":
-                  Console.WriteLine("Please provide your current password:");
-                  currentPassword = Console.ReadLine();
-                  account.ChangeSecurityQuestionAnswer(currentPassword);
+                  Console.WriteLine("\nAccount balance is currently " + account.GetBalance());
                   break;
                case "5":
-                  endMethod = true;
-                  Console.WriteLine("Logging out...");
+                  Console.WriteLine("Logging out...\n");
                   break;
                default:
                   Console.WriteLine("Invalid input. Please select only the number of the desired action and try again.");
@@ -76,15 +61,16 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
          //corresponds with the AccountLogin method in the Bank_Account class
          //Used for checking multiple accounts for a login match.
 
-         bool accountFound = false; 
+         bool accountFound = false;
+         string response = null;
 
          try
          {
 
-            Console.WriteLine("Please provide your account number: ");
+            Console.WriteLine("\nPlease provide your account number: ");
             string username = Console.ReadLine();
 
-            Console.WriteLine("Please enter the password: ");
+            Console.WriteLine("\nPlease enter the password: ");
             string password = Console.ReadLine();
 
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
@@ -100,13 +86,13 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
 
                   if (accountFound == true)
                   {
-                     AccessAccount(existingAccounts[i]);
+                     AccessAccount(existingAccounts[i], response);
                      i = 5;
                      break;
                   }
                   else
                   {
-                     Console.WriteLine("Information does not match this account."); // Using for testing purposes.
+                     Console.WriteLine("Information does not match this account.\n"); // Using for testing purposes.
                   }
                }
             }
@@ -116,9 +102,6 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
          {
             Console.WriteLine("Was unable to log into your account. Please make sure you entered a value and try again.");
          }
-
-
-
 
       }
 
@@ -137,22 +120,42 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
          try 
          { 
             //Request first name information and verify user input a value.
-            Console.WriteLine("What is your first name?");
+            Console.WriteLine("\nWhat is your first name?");
             response = Console.ReadLine();
 
             //Request last name information and verify user input a value.
-            Console.WriteLine("What is your last name?");
+            Console.WriteLine("\nWhat is your last name?");
             response2 = Console.ReadLine();
 
             if (string.IsNullOrEmpty(response) || response.StartsWith(' ') )
             {
-               Console.WriteLine("Error: You did not provide your first name. Please try again.");
+               Console.WriteLine("\nError: You did not provide your first name or your response starts with a space. Please do not include any spaces and try again.");
+               Console.WriteLine("What is your first name?");
                response = Console.ReadLine();
+
+               if (string.IsNullOrEmpty(response) || response.StartsWith(' '))
+               {
+                  throw new Exception();
+               }
+               else
+               {
+                  firstName = response;
+               }
             }
             else if (string.IsNullOrEmpty(response2) || response2.StartsWith(' '))
             {
-               Console.WriteLine("Error: You did not provide your last name. Please try again.");
+               Console.WriteLine("\nError: You did not provide your last name or your response starts with a space. Please do not include any spaces and try again.");
+               Console.WriteLine("What is your last name?");
                response2 = Console.ReadLine();
+
+               if (string.IsNullOrEmpty(response2) || response2.StartsWith(' '))
+               {
+                  throw new Exception();
+               }
+               else
+               {
+                  lastName = response2;
+               }
             }
             else
             {
@@ -160,7 +163,7 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
                lastName = response2;
             }
 
-            Console.WriteLine("Please create a password:\n" +
+            Console.WriteLine("\nPlease create a password:\n" +
                "(Must be at least 8 characters in length)");
             response = Console.ReadLine();
 
@@ -168,7 +171,7 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
             {
                if (string.IsNullOrEmpty(response) || response.StartsWith(' ') || !(response.Length >= 8))
                {
-                  Console.WriteLine("Error: You either did not enter a password or the password is not long enough. Please try again.");
+                  Console.WriteLine("\nError: You either did not enter a password or the password is not long enough. Please try again.");
                   Console.WriteLine("Please create a password:\n" + "(Must be at least 8 characters in length)");
                   response = Console.ReadLine();
 
@@ -180,12 +183,13 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
                }
                else
                {
+                  validInput = true;
                   password = response;
-                  Console.WriteLine("Creating your new bank account now...");
+                  Console.WriteLine("\nCreating your new bank account now...");
                   account = new Bank_Account(firstName, lastName, password, establishedAccounts); //Finish initializing the account
 
                   establishedAccounts.Add(account); //Add the new account to list of existing accounts
-                  AccessAccount(account);
+                  AccessAccount(account, response);
                }
             }
          } 
@@ -199,7 +203,6 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
       public void UpdateBankAccounts(List<Bank_Account> establishedAccounts)
       {
          StreamWriter fileWriter; //Creates the StreamWriter object that allows files to be written to.
-         Console.WriteLine("Thank you. Have a good day.");
 
          //Saves all account information to a file so it can be used next time program is launched
          var fileOutput = new FileStream("existingAccounts.txt", FileMode.OpenOrCreate, FileAccess.Write);
@@ -215,6 +218,8 @@ namespace Ciss_222_Final_Project_Initial_ConsoleApp
          }
 
          fileWriter.Close(); //Have to close file in order for information to save to it!
+
+         Console.WriteLine("Thank you. Have a good day.");
 
          Environment.Exit(0); // Forces the program to close.
       }
